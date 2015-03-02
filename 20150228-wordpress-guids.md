@@ -2,6 +2,10 @@
 
 ***TL;DR** &mdash; Updating the GUIDs of a WordPress site that's already live will annoy people subscribed to its RSS feeds. But if the site has never been live, you should update the GUIDs.*
 
+![Snowflake](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/14002042262_f43b4f2e9b_o-1024x576.jpg)
+
+*[Vega, snowflake desktop wallpaper](https://www.flickr.com/photos/chaoticmind75/14002042262/) by Alexey Kljatov. [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/)*
+
 #### What is a GUID?
 
 GUID is an acronym for Globally Unique Identifier. It is a concept that goes well beyond WordPress and is used in all kinds of applications. In the past, I used GUIDs heavily working with ASP.NET and Microsoft SQL Server for example. Those GUIDs looked like this:
