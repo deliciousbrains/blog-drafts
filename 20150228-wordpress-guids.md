@@ -4,7 +4,11 @@
 
 #### What is a GUID?
 
-GUID is an acronym for Globally Unique Identifier. It is a concept that goes well beyond WordPress and is used in all kinds of applications. In the past, I used GUIDs heavily working with ASP.NET and Microsoft SQL Server for example.
+GUID is an acronym for Globally Unique Identifier. It is a concept that goes well beyond WordPress and is used in all kinds of applications. In the past, I used GUIDs heavily working with ASP.NET and Microsoft SQL Server for example. Those GUIDs looked like this:
+
+```
+6F9619FF-8B86-D011-B42D-00C04FC964FF
+```
 
 (I know, shocking right! A Microsoft stack, really dude? If it's any consolation, I hated every minute of it.)
 
