@@ -22,11 +22,11 @@ WordPress employs GUIDs when it generates its RSS (and Atom) feeds. If you take 
 <guid isPermaLink="false">https://deliciousbrains.com/?p=6806</guid>
 ```
 
-WordPress uses a real, working post URL as the GUID. In fact, if you go to the URL in the example above, it will redirect you to the blog post it belong to. This is also the URL the post has when using the default Permalink setting. Since URLs are globally unique by their nature, they make pretty good GUIDs so long as they don't change. And in this case, since we're using the post ID in the URL, it's almost certain not to change. A good design decision.
+WordPress uses a real, working post URL as the GUID. In fact, if you go to the URL in the example above, it will redirect you to the blog post it belongs to. This is also the URL the post has when using the default Permalink setting. Since URLs are globally unique by their nature, they make pretty good GUIDs so long as they don't change. And in this case, since we're using the post ID in the URL, it's almost certain not to change. A good design decision.
 
 #### What are GUIDs used for in RSS feeds?
 
-RSS feed readers (like Feedly) use GUIDs to uniquely identify an item against all other items that have appeared in the feed and will appear in the feed in the future. It uses the GUID to determine if it should show an item as new.
+RSS feed readers (e.g. Feedly) use GUIDs to uniquely identify an item against all other items that have appeared in the feed and will appear in the future. It uses the GUID to determine if it should show an item as new.
 
 The GUID is supposed to be the constant. Other details of the post may change, like the title, content, URL, dates, etc but so long as the GUID stays the same, the feed reader can avoid showing the same item twice.
 
