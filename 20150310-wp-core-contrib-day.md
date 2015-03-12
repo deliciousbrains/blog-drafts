@@ -55,6 +55,7 @@ svn co https://develop.svn.wordpress.org/trunk wordpress-core
 ```
 
 You should see a directory structure similar to the following:
+
 [WordPress Core Directory Structure](<SCREENSHOT>)
 
 ### Build WordPress
@@ -75,6 +76,7 @@ grunt
 ```
 
 You should now see a couple of new directories in the WordPress Core check out, `node_modues` and `build`.
+
 [WordPress Core After Build](<SCREENSHOT>)
 
 From now on, any time you make a change to the WordPress source code found under the `src` directory you can simply run `grunt` at the checkout root again to update the contents of the `build` directory, which will be the root of your development site. We talk more about that later in the [Keep It Clean][] section.
@@ -83,17 +85,22 @@ From now on, any time you make a change to the WordPress source code found under
 The WordPress Core source has a neat feature that lets you create your `wp-config.php` file in the root of the checked out source, and the site which is to be served from the `build` directory will still pick up the correct configuration.
 
 Copy the supplied `wp-config-sample.php` to `wp-config.php`and update it to include the database and database user details for a new MySQL database you have created locally.
+
 [WordPress Core With Config Files](<SCREENSHOT>)
 
 While you're at it, why not copy the `wp-tests-config-sample.php` file to `wp-tests-config.php` and update it with the database and database user details for another database you've also created locally so that you can run the unit tests too? It's important to use a separate database for the unit tests as the database is completely refreshed during a unit tests run.
 
 Now you have a `wp-config.php` for your development site, it's time to set up a website such as http://wordpress-core.dev that uses the `build` directory as its document root. I use [MAMP Pro](http://www.mamp.info/en/mamp-pro/) for its simplicity and flexibility, but you should use whatever you're most comfortable with. Ideally use PHP 5.2.x in your development as this is the minimum supported version of PHP for WordPress so you don't want to use features from later versions of PHP.
+
 [WordPress Core Site Setup (MAMP PRO)](<SCREENSHOT>)
 
 ### Give It a Spin
 The moment of truth, make sure you can connect to your new WordPress development site and set it up.
+
 [WordPress › Installation](<SCREENSHOT>)
+
 [Dashboard ‹ WordPress Core — WordPress](<SCREENSHOT>)
+
 [WordPress Core | Just another WordPress site](<SCREENSHOT>)
 
 ### Run The Unit Tests
@@ -192,6 +199,7 @@ In the Attachments block there is an "Attach file" button which leads you to a p
 
 ### Modify The Ticket
 Near the bottom of the WordPress Core ticket you've been working on, you should see a "Modify Ticket" block.
+
 [Modify Ticket Block](<SCREENSHOT>)
 
 Depending on what you have done or found, you may need to alter some of the Workflow Keywords within the **Change Properties** section.
