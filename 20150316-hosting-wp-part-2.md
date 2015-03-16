@@ -1,4 +1,4 @@
-# Hosting WordPress Yourself Part 1 – Installing Nginx, PHP and MySQL
+# Hosting WordPress Yourself Part 2 – Installing Nginx, PHP and MySQL
 
 In part 1 of this series on Hosting WordPress Yourself, I took you through the initial steps to setting up and securing a virtual server. In this post I will guide you through the process of setting up Nginx, PHP-FPM and MySQL, which will form the foundations of a working web server.
 
