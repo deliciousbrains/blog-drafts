@@ -1,5 +1,7 @@
 # WP Core Contrib Day
 
+![WP Core Contrib Day](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Make-WordPress-Core.png)
+
 Every month the staff here at Delicious Brains take a "WP Core Contrib Day", a day to give back to [WordPress](https://wordpress.org) Core. This is an important day for us as we make our living from premium WordPress plugins, using our skills to help the open source WordPress Core keep on being awesome just feels right.
 
 In this article I'll discuss the basics for finding things to work on, how to handle the WordPress source code, how to submit your work and what you might expect to happen from there. This article is very much targeted towards PHP developers that already know how to set up a normal WordPress installation, but are looking to dive in and contribute back to WordPress Core.
@@ -50,18 +52,20 @@ OK, you've found a ticket to investigate, to get any further you need to downloa
 
 ### Download The Source
 The WordPress Core source is very different to the WordPress software you download to set up a new instance of WordPress, it has a different directory structure to help with development. WordPress Core is held in a Subversion repository, as such you should use Subversion to obtain your copy of trunk.
+
 ```
 svn co https://develop.svn.wordpress.org/trunk wordpress-core
 ```
 
 You should see a directory structure similar to the following:
 
-[WordPress Core Directory Structure](<SCREENSHOT>)
+![WordPress Core Directory Structure](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/WordPress-Core-Directory-Structure.png)
 
 ### Build WordPress
 You have now checked out the WordPress source, but as it stands you can not spin up a WordPress site just yet, first you need to build WordPress.
 
 Required tools:
+
 * [Node.js](https://nodejs.org)
 * [npm](https://www.npmjs.com)
 * [Grunt](http://gruntjs.com)
@@ -69,6 +73,7 @@ Required tools:
 To build WordPress Core you'll need to install Grunt and its CLI. If your preferred development tools don't include Grunt yet, there's a very simple [Getting Started](http://gruntjs.com/getting-started) guide for setting up Grunt and its dependencies Node.js and npm.
 
 Change to the directory you just created when checking out the WordPress Core source, install the npm modules and run the default Grunt job.
+
 ```
 cd wordpress-core
 npm install
@@ -77,7 +82,7 @@ grunt
 
 You should now see a couple of new directories in the WordPress Core check out, `node_modues` and `build`.
 
-[WordPress Core After Build](<SCREENSHOT>)
+![WordPress Core After Build](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/WordPress-Core-After-Build.png)
 
 From now on, any time you make a change to the WordPress source code found under the `src` directory you can simply run `grunt` at the checkout root again to update the contents of the `build` directory, which will be the root of your development site. We talk more about that later in the [Keep It Clean][] section.
 
@@ -86,32 +91,33 @@ The WordPress Core source has a neat feature that lets you create your `wp-confi
 
 Copy the supplied `wp-config-sample.php` to `wp-config.php`and update it to include the database and database user details for a new MySQL database you have created locally.
 
-[WordPress Core With Config Files](<SCREENSHOT>)
+![WordPress Core With Config Files](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/WordPress-Core-With-Config-Files.png)
 
 While you're at it, why not copy the `wp-tests-config-sample.php` file to `wp-tests-config.php` and update it with the database and database user details for another database you've also created locally so that you can run the unit tests too? It's important to use a separate database for the unit tests as the database is completely refreshed during a unit tests run.
 
 Now you have a `wp-config.php` for your development site, it's time to set up a website such as http://wordpress-core.dev that uses the `build` directory as its document root. I use [MAMP Pro](http://www.mamp.info/en/mamp-pro/) for its simplicity and flexibility, but you should use whatever you're most comfortable with. Ideally use PHP 5.2.x in your development as this is the minimum supported version of PHP for WordPress so you don't want to use features from later versions of PHP.
 
-[WordPress Core Site Setup (MAMP PRO)](<SCREENSHOT>)
+![WordPress Core Site Setup (MAMP PRO)](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/WordPress-Core-Site-Setup-MAMP-PRO.png)
 
 ### Give It a Spin
 The moment of truth, make sure you can connect to your new WordPress development site and set it up.
 
-[WordPress › Installation](<SCREENSHOT>)
+![WordPress › Installation](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/WordPress-%E2%80%BA-Installation.png)
 
-[Dashboard ‹ WordPress Core — WordPress](<SCREENSHOT>)
+![Dashboard ‹ WordPress Core — WordPress](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Dashboard-%E2%80%B9-WordPress-Core-—-WordPress.png)
 
-[WordPress Core | Just another WordPress site](<SCREENSHOT>)
+![WordPress Core | Just another WordPress site](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/WordPress-Core-Just-another-WordPress-site.png)
 
 ### Run The Unit Tests
 It's a very good idea to run the unit tests just to be sure all is well in your development site, and to make sure any changes you later make do not break anything.
 
 From the root of the checked out source...
+
 ```
 phpunit
 ```
 
-[WordPress Core Unit Tests Run](<SCREENSHOT>)
+![WordPress Core Unit Tests Run](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/WordPress-Core-Unit-Tests-Run.png)
 
 Don't be surprised if you see a failure or two in the unit tests, during development there often are some, maybe you could fix them? At least you know where the problems exist and so when you make your changes you can tell whether you made things better, worse, or at least didn't affect them!
 
@@ -122,21 +128,27 @@ Let's assume you're starting off your WordPress Core contributions by refreshing
 
 ### Keep It Clean
 Before you apply a patch, be absolutely sure that your checked out source and build are "clean", there is nothing worse than working on something only to find that you can't create a clean patch because you have some previous code changes from another ticket polluting your code base.
+
 ```
 svn diff
 ```
+
 If `svn diff` returns anything, maybe because you've already worked on a patch, revert the changes.
+
 ```
 svn revert path/to/changed/file
 ```
+
 And then double check again with `svn diff`.
 
 When there are no changes in your checkout, make sure you're up to date with other changes that have been committed to the repository.
+
 ```
 svn up
 ```
 
 Now ensure your cleaned up repository builds, and then [Give It a Spin][].
+
 ```
 grunt
 ```
@@ -146,11 +158,12 @@ Download the latest patch file from the ticket, it should be named something lik
 
 The file should be copied to the root of your WordPress Core checkout and applied from there with `patch`:
 
+
 ```
 patch -p0 < 14584.3.patch
 ```
 
-[wordpress-core — Applying a Patch](<SCREENSHOT>)
+![wordpress-core — Applying a Patch](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/wordpress-core-—-Applying-a-Patch.png)
 
 Patches are always created and applied from the root of the code base, so you should generally see `src/...` or `tests/...` in the file names being patched.
 
@@ -158,7 +171,7 @@ Hopefully the patch applied as expected, if not (maybe that's why you're refresh
 
 Because I use the awesome [PhpStorm](https://www.jetbrains.com/phpstorm/) for all my PHP development I can easily find all the changes the patch applied.
 
-[PhpStorm - Changed Files](<SCREENSHOT>)
+![PhpStorm - Changed Files](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/PhpStorm-Changed-Files.png)
 
 However, another way to double check that the patch applied correctly is to use the same method you'd use in [Creating a Patch][].
 
@@ -173,13 +186,15 @@ If at all possible, please add unit tests or update the unit tests in the `tests
 You've developed and tested your WordPress Core changes and are now ready to pass your changes back to the WordPress Core team for reviewing and testing, so how do you do that?
 
 It so happens that if you run the following, you'll get exactly what is needed to patch another checkout of the repository:
+
 ```
 svn diff
 ```
 
-[wordpress-core — Creating a Patch](<SCREENSHOT>)
+![wordpress-core — Creating a Patch](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/wordpress-core-—-Creating-a-Patch.png)
 
 So, to create your patch file simply redirect the output of `svn diff` to a file:
+
 ```
 svn diff > 14584.4.patch
 ```
@@ -189,18 +204,18 @@ Notice that in the example we're creating a file with an increased version numbe
 ### Submit The Patch
 Submitting the patch file is relatively simple. Make sure you're logged in to wordpress.org, navigate to the ticket in question and you should find an Attachments block nestled between the main description block and the Change History.
 
-[Attachments Block In a Ticket](<SCREENSHOT>)
+![Attachments Block In a Ticket](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Attachments-Block-In-a-Ticket.png)
 
 In the Attachments block there is an "Attach file" button which leads you to a page where you can choose your file to upload and give a brief description.
 
-[Submitting a Ticket Attachment](<SCREENSHOT>)
+![Submitting a Ticket Attachment](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Submitting-a-Ticket-Attachment.png)
 
-[Ticket Attachment Submitted](<SCREENSHOT>)
+![Ticket Attachment Submitted](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Ticket-Attachment-Submitted.png)
 
 ### Modify The Ticket
 Near the bottom of the WordPress Core ticket you've been working on, you should see a "Modify Ticket" block.
 
-[Modify Ticket Block](<SCREENSHOT>)
+![Modify Ticket Block](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Modify-Ticket-Block.png)
 
 Depending on what you have done or found, you may need to alter some of the Workflow Keywords within the **Change Properties** section.
 
@@ -230,7 +245,7 @@ This is a slightly different report to the [My Patches][] report in that it incl
 ### [Timeline](https://core.trac.wordpress.org/timeline)
 OK, this is more for self congratulating, or just finding that ticket you remember doing something on but it's now closed.
 
-[Timeline – WordPress Trac](<SCREENSHOT>)
+![Timeline – WordPress Trac](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Timeline-–-WordPress-Trac.png)
 
 By default this report shows all ticket events you've been involved in up to 90 days back. If you want to look a little further back, there is a little control panel in the top right you can use to set the start date further back or you can use the "Previous Period" and "Next Period" links to step backwards and forwards through your timeline.
 
