@@ -1,6 +1,6 @@
-# WP Core Contrib Day
+# A Developer's Guide to Contributing to WordPress Core
 
-![WP Core Contrib Day](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Make-WordPress-Core.png)
+![Dive In To WordPress Core Development](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Lc9K8NHrREC7p3POZ79H_msp_0506_0270.jpg)
 
 Every month the team here at Delicious Brains take a "WP Core Contrib Day", a day to give back to [WordPress](https://wordpress.org) Core. This is an important day for us as we make our living from premium WordPress plugins, using our skills to help keep WordPress core awesome just feels right. Also, it turns out that all of us contributing a work day per month to WordPress Core is very close the 5% contribution that Matt Mullenweg talks about in his [5 for the Future](http://ma.tt/2014/09/five-for-the-future/) post.
 
