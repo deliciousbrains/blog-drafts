@@ -238,13 +238,19 @@ There's a good chance that you'll get a few notifications by email when things c
 
 The best kind of notification is a commit notification, or what I call a "props" email. These are awesome, it's great to see your username given some props when a ticket is closed as complete, take a moment and pat yourself on the back, you earned it!
 
-### [My Patches](https://core.trac.wordpress.org/my-patches)
+### My Patches
+[https://core.trac.wordpress.org/my-patches](https://core.trac.wordpress.org/my-patches)
+
 Use this Trac report now and then to review the status of tickets you've submitted patches to but for some reason they have not yet been accepted, reviewed, tested or committed through to trunk.
 
-### [Tickets I've Participated In](https://core.trac.wordpress.org/my-comments)
+### Tickets I've Participated In
+[https://core.trac.wordpress.org/my-comments](https://core.trac.wordpress.org/my-comments)
+
 This is a slightly different report to the [My Patches][] report in that it includes tickets you've commented on. Maybe you've been reviewing or testing a patch.
 
-### [Timeline](https://core.trac.wordpress.org/timeline)
+### Timeline
+[https://core.trac.wordpress.org/timeline](https://core.trac.wordpress.org/timeline)
+
 OK, this is more for self congratulating, or just finding that ticket you remember doing something on but it's now closed.
 
 ![Timeline – WordPress Trac](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Timeline-–-WordPress-Trac.png)
