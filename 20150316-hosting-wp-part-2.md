@@ -1,6 +1,11 @@
 # Hosting WordPress Yourself Part 2 – Installing Nginx, PHP and MySQL
 
-In part 1 of this series on Hosting WordPress Yourself, I took you through the initial steps to setting up and securing a virtual server. In this post I will guide you through the process of setting up Nginx, PHP-FPM and MySQL, which will form the foundations of a working web server.
+### Series
+
+* [Part 1 - Setting Up a Secure Virtual Server](https://deliciousbrains.com/hosting-wordpress-setup-secure-virtual-server/)
+* Part 2 - Installing Nginx, PHP and MySQL
+
+In [Part 1](https://deliciousbrains.com/hosting-wordpress-setup-secure-virtual-server/) of this series on Hosting WordPress Yourself, I took you through the initial steps to setting up and securing a virtual server. In this post I will guide you through the process of setting up [Nginx](http://nginx.org/en/), [PHP-FPM](http://php-fpm.org) and [MySQL](http://www.mysql.com), which will form the foundations of a working web server.
 
 Before moving on, you will need to open a new SSH connection to the server, if you haven’t already:
 
@@ -45,13 +50,13 @@ sudo nano /etc/nginx/nginx.conf
 
 I’m not going to list every configuration directive but I am going to briefly mention those that you should change.
 
-Start by setting the **user** to the _username_ that you’re currently logged in with. This will make managing file permissions much easier in the future, but this is only advantageous when running a single user access server.
+Start by setting the **user** to the _username_ that you’re currently logged in with. This will make managing file permissions much easier in the future, but this is only acceptable security-wise when running a single user access server.
 
 The **worker_processes** directive determines how many workers to spawn per server. The general rule of thumb is to set this to the amount of CPU cores your server has available. In my case, this is _1_.
 
-The events block contains 2 directives, the first **worker_connections** should be set to your server’s open file limit. This tells Nginx how many simultaneous connections can be opened by each _worker_process_. Therefore, if you have 2 CPU cores and an open file limit of 1024, your server can handle 2048 connections per second. Connections however doesn’t directly equate to the number of users that can be handled by the server, as the majority of web browsers open at least 2 connections per request. The **multi_accept** directive should be uncommented and set to _on_, which informs each _worker_process_ to accept all new connections at a time, opposed to accepting one new connection at a time.
+The events block contains 2 directives, the first **worker_connections** should be set to your server’s open file limit. This tells Nginx how many simultaneous connections can be opened by each _worker_process_. Therefore, if you have 2 CPU cores and an open file limit of 1024, your server can handle 2048 connections per second. However, the number of connections doesn’t directly equate to the number of users that can be handled by the server, as the majority of web browsers open at least 2 connections per request. The **multi_accept** directive should be uncommented and set to _on_, which informs each _worker_process_ to accept all new connections at a time, opposed to accepting one new connection at a time.
 
-Moving down the file you will see a _http_ block. The first directive to change is the **keepalive_timeout**, which by default is set to 65. **keepalive_timeout** determines how many seconds a connection to the client should be kept open before it’s closed by Nginx. This directive should be lowered as you don’t want idle connections sitting there for up to 65 seconds if they can be utilised by new clients. I have set mine to _15_.
+Moving down the file you will see an _http_ block. The first directive to change is the **keepalive_timeout**, which by default is set to 65. The **keepalive_timeout** determines how many seconds a connection to the client should be kept open before it’s closed by Nginx. This directive should be lowered as you don’t want idle connections sitting there for up to 65 seconds if they can be utilised by new clients. I have set mine to _15_.
 
 For security reasons you should uncomment the **server_tokens** directive and ensure it is set to _off_. This will disable emitting the Nginx version number in error messages and response headers.
 
@@ -75,12 +80,9 @@ sudo service nginx restart
 
 If everything worked out ok, you should still be able to see the Nginx welcome page when visiting the FQDN in the browser.
 
-![Welcome to nginx](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Image-1-Nginx.jpeg)
-
-
 ## PHP-FPM
 
-Just like Nginx, the Apt-Get repository does contain a PHP repository, however it isn’t the most up-to-date so we will use one maintained by [Ondřej Surý](https://launchpad.net/~ondrej/+archive/ubuntu/php5-5.6). Add the repo and update the package lists using the following commands:
+Just like Nginx, the Apt-Get repository does contain a PHP repository, however, it isn’t the most up-to-date so we will use one maintained by [Ondřej Surý](https://launchpad.net/~ondrej/+archive/ubuntu/php5-5.6). Add the repo and update the package lists using the following commands:
 
 ```
 sudo apt-add-repository ppa:ondrej/php5-5.6 -y
@@ -122,7 +124,7 @@ Next, you should adjust the php.ini to increase the WordPress maximum upload siz
 sudo nano /etc/php5/fpm/php.ini
 ```
 
-Change the following lines, to match the value you assigned to the **client_max_body_size** directive when configuring Nginx:
+Change the following lines to match the value you assigned to the **client_max_body_size** directive when configuring Nginx:
 
 ```
 upload_max_filesize = 2M
@@ -151,7 +153,7 @@ Now that Nginx and PHP have been installed, you can confirm that they are both r
 top
 ```
 
-If you hit _SHIFT M_ the output will be arranged my memory usage which should bring the nginx and php5-fpm processes into view. You should notice a few occurrences of both nginx and php-fpm. Both processes will have one instance running under the root user (this is main process that spawns each worker) and the remainder should be running under the username you specified.
+If you hit _SHIFT M_ the output will be arranged by memory usage which should bring the nginx and php5-fpm processes into view. You should notice a few occurrences of both nginx and php-fpm. Both processes will have one instance running under the root user (this is main process that spawns each worker) and the remainder should be running under the username you specified.
 
 ![Running processes](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Image-4-PHP.jpeg)
 
@@ -167,7 +169,7 @@ To install MySQL, issue the following command:
 sudo apt-get install mysql-server
 ```
 
-You’ll be prompted to enter a root password, which should be complex, as described in the previous post. 
+You’ll be prompted to enter a root password, which should be complex, as described at the end of the [previous post](https://deliciousbrains.com/hosting-wordpress-setup-secure-virtual-server/). 
 
 ![MySQL installation](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Image-1-MySQL.jpeg)
 
