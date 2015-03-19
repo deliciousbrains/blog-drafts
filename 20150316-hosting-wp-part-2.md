@@ -50,19 +50,19 @@ sudo nano /etc/nginx/nginx.conf
 
 I’m not going to list every configuration directive but I am going to briefly mention those that you should change.
 
-Start by setting the **user** to the _username_ that you’re currently logged in with. This will make managing file permissions much easier in the future, but this is only acceptable security-wise when running a single user access server.
+Start by setting the **user** to the `username` that you’re currently logged in with. This will make managing file permissions much easier in the future, but this is only acceptable security-wise when running a single user access server.
 
-The **worker_processes** directive determines how many workers to spawn per server. The general rule of thumb is to set this to the amount of CPU cores your server has available. In my case, this is _1_.
+The **worker_processes** directive determines how many workers to spawn per server. The general rule of thumb is to set this to the amount of CPU cores your server has available. In my case, this is `1`.
 
-The events block contains 2 directives, the first **worker_connections** should be set to your server’s open file limit. This tells Nginx how many simultaneous connections can be opened by each _worker_process_. Therefore, if you have 2 CPU cores and an open file limit of 1024, your server can handle 2048 connections per second. However, the number of connections doesn’t directly equate to the number of users that can be handled by the server, as the majority of web browsers open at least 2 connections per request. The **multi_accept** directive should be uncommented and set to _on_, which informs each _worker_process_ to accept all new connections at a time, opposed to accepting one new connection at a time.
+The events block contains 2 directives, the first **worker_connections** should be set to your server’s open file limit. This tells Nginx how many simultaneous connections can be opened by each _worker_process_. Therefore, if you have 2 CPU cores and an open file limit of 1024, your server can handle 2048 connections per second. However, the number of connections doesn’t directly equate to the number of users that can be handled by the server, as the majority of web browsers open at least 2 connections per request. The **multi_accept** directive should be uncommented and set to `on`, which informs each _worker_process_ to accept all new connections at a time, opposed to accepting one new connection at a time.
 
-Moving down the file you will see an _http_ block. The first directive to change is the **keepalive_timeout**, which by default is set to 65. The **keepalive_timeout** determines how many seconds a connection to the client should be kept open before it’s closed by Nginx. This directive should be lowered as you don’t want idle connections sitting there for up to 65 seconds if they can be utilised by new clients. I have set mine to _15_.
+Moving down the file you will see an _http_ block. The first directive to change is the **keepalive_timeout**, which by default is set to 65. The **keepalive_timeout** determines how many seconds a connection to the client should be kept open before it’s closed by Nginx. This directive should be lowered as you don’t want idle connections sitting there for up to 65 seconds if they can be utilised by new clients. I have set mine to `15`.
 
-For security reasons you should uncomment the **server_tokens** directive and ensure it is set to _off_. This will disable emitting the Nginx version number in error messages and response headers.
+For security reasons you should uncomment the **server_tokens** directive and ensure it is set to `off`. This will disable emitting the Nginx version number in error messages and response headers.
 
-Underneath **server_tokens** add the **client_max_body_size** directive and set this to the maximum upload size you require in the WordPress Media Library. I chose a value of _64m_.
+Underneath **server_tokens** add the **client_max_body_size** directive and set this to the maximum upload size you require in the WordPress Media Library. I chose a value of `64m`.
 
-Further down the _http_ block you will see a section dedicated to Gzip compression. By default, Gzip is enabled but is disabled for Microsoft Internet Explorer 6, however you should tweak these values further for better handling of static files. First, you should uncomment the **gzip_proxied** directive and set it to _any_, which will ensure all proxied request responses are gzipped. Secondly, you should uncomment the **gzip_comp_level** and set it to a value of _2_. This controls the compression level of a response and can have a value in the range of 1 - 9, however setting this too high can have a negative effect on CPU usage. Finally, you should uncomment the **gzip_types** directive, leaving the default values in place. This will ensure that JavaScript, CSS and other file types are gzipped in addition to the HTML file type.
+Further down the _http_ block you will see a section dedicated to Gzip compression. By default, Gzip is enabled but is disabled for Microsoft Internet Explorer 6, however you should tweak these values further for better handling of static files. First, you should uncomment the **gzip_proxied** directive and set it to `any`, which will ensure all proxied request responses are gzipped. Secondly, you should uncomment the **gzip_comp_level** and set it to a value of `2`. This controls the compression level of a response and can have a value in the range of 1 - 9, however setting this too high can have a negative effect on CPU usage. Finally, you should uncomment the **gzip_types** directive, leaving the default values in place. This will ensure that JavaScript, CSS and other file types are gzipped in addition to the HTML file type.
 
 That’s the basic Nginx configuration dealt with, hit _CTRL X_ followed by _Y_ to save the changes. For the changes to take effect you must restart Nginx, however before doing so you should ensure that the configuration file contains no errors by issuing the following command:
 
@@ -109,7 +109,7 @@ Now that PHP has installed you need to configure the user and group that the ser
 sudo nano /etc/php5/fpm/pool.d/www.conf
 ```
 
-Change the following lines, replacing _www-data_ with your _username_:
+Change the following lines, replacing _www-data_ with your `username`:
 
 ```
 user = www-data
