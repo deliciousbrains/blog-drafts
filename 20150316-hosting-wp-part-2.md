@@ -27,7 +27,7 @@ Once complete, you can confirm that Nginx has been installed with the following 
 nginx -v
 ```
 
-Additionally, when visiting your server’s FQDN (fully qualified domain name) in the browser, you should see an Nginx welcome page.
+Additionally, when visiting your server’s Fully Qualified Domain Name (FQDN) in the browser, you should see an Nginx welcome page.
 
 ![Welcome to nginx](https://s3.amazonaws.com/cdn.deliciousbrains.com/content/uploads/2015/03/Image-1-Nginx.jpeg)
 
