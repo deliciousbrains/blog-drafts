@@ -13,7 +13,7 @@ Before moving on, you will need to open a new SSH connection to the server, if y
 
 ## Installing Nginx
 
-Although the Ubuntu package manager (Apt-Get) has access to an Nginx repository, it doesn’t have the _fastcgi_cache_purge_ module compiled-in, which will be required later in this series. Luckily, [rtCamp](https://rtcamp.com) have created a pre-compiled version which contains the _fastcgi_cache_purge_ module. To add the repository and install Nginx, enter the following commands:
+Although the Ubuntu package manager (apt-get) has access to Nginx packages, they don’t have the _fastcgi_cache_purge_ module compiled-in, which will be required later in this series. Luckily, [rtCamp](https://rtcamp.com) have created a pre-compiled version which contains the _fastcgi_cache_purge_ module. To add the repository and install Nginx, enter the following commands:
 
 ```
 sudo add-apt-repository ppa:rtcamp/nginx -y
@@ -82,7 +82,7 @@ If everything worked out ok, you should still be able to see the Nginx welcome p
 
 ## PHP-FPM
 
-Just like Nginx, the Apt-Get repository does contain a PHP repository, however, it isn’t the most up-to-date so we will use one maintained by [Ondřej Surý](https://launchpad.net/~ondrej/+archive/ubuntu/php5-5.6). Add the repo and update the package lists using the following commands:
+Just like Nginx, the apt-get repository does contain PHP packages, however, they are not the most up-to-date so we will use one maintained by [Ondřej Surý](https://launchpad.net/~ondrej/+archive/ubuntu/php5-5.6). Add the repository and update the package lists using the following commands:
 
 ```
 sudo apt-add-repository ppa:ondrej/php5-5.6 -y
